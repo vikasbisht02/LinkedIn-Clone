@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors"
 
 
 import authRoutes from "./routes/auth.route.js"
@@ -15,13 +16,18 @@ dotenv.config();
 const app  = express();
 const PORT = process.env.PORT 
 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    
+}))
 app.use(express.json({limit: "5mb"})) // parse json request bodies
 app.use(cookieParser()) //parse cookie
 
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/users", userRoutes)
 app.use("/api/v1/posts", postRoutes)
-app.use("/api/v1/notification", NotificationRoutes)
+app.use("/api/v1/notifications", NotificationRoutes)
 app.use("/api/v1/connections", connectionRoutes)
 
 
