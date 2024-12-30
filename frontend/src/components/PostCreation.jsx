@@ -27,7 +27,6 @@ const PostCreation = ({ user }) => {
 			toast.error(err.response.data.message || "Failed to create post");
 		},
 	});
-	
 
 	const handlePostCreation = async () => {
 		try {

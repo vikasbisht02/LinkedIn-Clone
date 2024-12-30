@@ -1,9 +1,8 @@
+import cloudinary from "../lib/cloudinary.js";
 import Post from "../models/post.model.js";
-import cloudinary from "cloudinary";
 import Notification from "../models/notification.model.js";
 import { sendCommentNotificationEmail } from "../mailController/email.js";
 
-// Fetch feed posts for the user
 export const getFeedPosts = async (req, res) => {
 	try {
 		const posts = await Post.find({ author: { $in: [...req.user.connections, req.user._id] } })

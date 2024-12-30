@@ -93,6 +93,7 @@ export const sendConnectionAcceptedEmail = async (
   recipientName,
   profileUrl
 ) => {
+  
   try {
     // Ensure required parameters are provided
     if (!senderEmail || !senderName || !recipientName || !profileUrl) {

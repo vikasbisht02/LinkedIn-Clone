@@ -7,6 +7,6 @@ const router = express.Router();
 router.get("/suggestions", protectRoute, getSuggestedConnections);
 router.get("/:username", protectRoute, getPublicProfile);
 
-router.put("/profile", protectRoute, updateProfile)
+router.put("/profile", protectRoute, updateProfile);
 
 export default router;

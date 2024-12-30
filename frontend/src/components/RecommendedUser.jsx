@@ -6,7 +6,6 @@ import { Check, Clock, UserCheck, UserPlus, X } from "lucide-react";
 
 const RecommendedUser = ({ user }) => {
 	const queryClient = useQueryClient();
-  
 
 	const { data: connectionStatus, isLoading } = useQuery({
 		queryKey: ["connectionStatus", user._id],
