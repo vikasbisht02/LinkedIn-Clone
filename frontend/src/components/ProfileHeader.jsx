@@ -22,13 +22,25 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 
 	const { mutate: sendConnectionRequest } = useMutation({
 		mutationFn: (userId) => axiosInstance.post(`/connections/request/${userId}`),
+		onMutate: async (userId) => {
+			// Optimistically update connectionStatus
+			await queryClient.cancelQueries(["connectionStatus", userId]);
+			const previousStatus = queryClient.getQueryData(["connectionStatus", userId]);
+			queryClient.setQueryData(["connectionStatus", userId], {
+				data: { status: "pending" },
+			});
+			return { previousStatus };
+		},
 		onSuccess: () => {
 			toast.success("Connection request sent");
 			refetchConnectionStatus();
+			queryClient.invalidateQueries(["connectionStatus", userData._id]);
 			queryClient.invalidateQueries(["connectionRequests"]);
 		},
-		onError: (error) => {
+		onError: (error, userId, context) => {
 			toast.error(error.response?.data?.message || "An error occurred");
+			// Rollback optimistic update
+			queryClient.setQueryData(["connectionStatus", userId], context.previousStatus);
 		},
 	});
 
@@ -70,8 +82,8 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 
 	const getConnectionStatus = useMemo(() => {
 		if (isConnected) return "connected";
-		if (!isConnected) return "not_connected";
-		return connectionStatus?.data?.status;
+		if (!isConnected && connectionStatus?.data) return connectionStatus.data.status;
+		return "not_connected";
 	}, [isConnected, connectionStatus]);
 
 	const renderConnectionButton = () => {
@@ -255,4 +267,5 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 		</div>
 	);
 };
+
 export default ProfileHeader;

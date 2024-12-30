@@ -109,7 +109,7 @@ export const sendConnectionAcceptedEmail = async (
 
     const info = await transporter.sendMail(mailOptions); // Send the email
     console.log(
-      `Connection request accepted Email sent successfully to ${recipientEmail}. Message ID: ${info.messageId}`
+      `Connection request accepted Email sent successfully to ${senderEmail}. Message ID: ${info.messageId}`
     );
 
     // Return success status
