@@ -14,8 +14,8 @@ JWT_SECRET=<yourverystrongsecret>
 NODE_ENV=development
 
 SMTP_HOST=<smtp.gmail.com>
-SMTP_MAIL=<your_mail>
-SMTP_PASSWORD=<gmai_App_Pasword>
+SMTP_MAIL=<your_email>
+SMTP_PASSWORD=<email_app_password>
 SMTP_PORT=<587>
 
 
