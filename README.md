@@ -1,6 +1,4 @@
-<h1 align="center"><a href="https://linkedin-clone-i11c.onrender.com" target="_blank">LinkedIn Clone ✨</a></h1>
-
-![Demo App](/frontend/public/screenshot-for-readme.png)
+<h1 align="center"><a href="https://linkedin-clone-i11c.onrender.com" target="_blank">LinkedIn Clone ✨</a>![Demo App](/frontend/public/screenshot-for-readme.png)</h1>
 
 ### Setup .env file
 
